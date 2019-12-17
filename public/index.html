@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Todo List</title>
+  <script src="./js/bundle.js"></script>
+</head>
+<body>
+  <div id="app">
+
+  <h3>Population of countries: {{totalPopulation}}</h3>
+
+  <!-- <input list="countries">
+
+  <datalist id="countries">
+    <option v-for="(country, index) in countries" v-bind:value="country.name">
+  </datalist> -->
+  <label for="display-country">Display information for:</label>
+  <select v-model="displayCountry" id="display-country">
+    <option v-for="(country, index) in countries" :value="countries[index]">{{country.name}}</option>
+  </select>
+
+  <div v-if="displayCountry">
+    <p>{{displayCountry.name}}</p>
+    <img :src="displayCountry.flag">
+  </div>
+
+  <form v-on:submit.prevent="addFavouriteCountry">
+    <label for="favourite-country">Add favourite country:</label>
+    <select v-model="favouriteCountry" id="favourite-country">
+      <option v-for="(country, index) in countries" :value="countries[index]">{{country.name}}</option>
+    </select>
+    <input type="submit" value="Add favourite">
+  </form>
+
+  <div>
+    <h2>Favourite countries</h2>
+    <ul>
+      <li v-for="country in favouriteCountries">
+        {{country.name}}
+      </li>
+    </ul>
+  </div>
+
+  </div>
+</body>
